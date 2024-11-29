@@ -7,3 +7,4 @@ herramienta brinda un espacio seguro y confiable para el intercambio de ideas, e
 conocimientos entre emprendedores. Redcom no solo facilita la visibilidad de los proyectos de
 innovación actuales,sino que también busca fomentar el crecimiento del ecosistema emprendedor
 colombiano mediante la creación de una red de apoyo mutuo y sinergia.
+![Logo del aplicativo](https://github.com/dmvalencia921/red_com/blob/main/Logo.png)
