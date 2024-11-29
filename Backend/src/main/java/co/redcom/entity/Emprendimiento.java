@@ -6,19 +6,34 @@ import lombok.Data;
 
 import java.sql.Date;
 
+/**
+ * Entidad que nos permite saber el emprendimiento
+ * @Data notacion de loombok que nos permite obtener el construtor, get y set
+ * @Entity notacion que nos permite identificar la entidad para convertila en una tabla
+ * @table esquema de DB en el cual se crea la entidad (tabla)
+ */
 @Data
 @Entity
 @Table(schema = "redCom")
 public class Emprendimiento {
 
+    /**
+     * identificador de la clase autoincrementable
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEmprendimiento;
 
+    /**
+     * Titulo del emprendimiento
+     */
     @Column(nullable = false, columnDefinition = "TEXT")
     @NotEmpty(message = "El titulo no puede ser nulo")
     private String titulo;
 
+    /**
+     * Descripcion del eprendimiento a publicar
+     */
     @Column(nullable = false, columnDefinition = "TEXT")
     @NotEmpty(message = "La descripcion no puede ser nula")
     private String descripcion;
@@ -29,10 +44,16 @@ public class Emprendimiento {
     @Column(nullable = false, length = 30)
     private Date fechaPublicacion;
 
+    /**
+     * Relacion con tabla usuario
+     */
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    /**
+     * Relacion con tabla categoria
+     */
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;

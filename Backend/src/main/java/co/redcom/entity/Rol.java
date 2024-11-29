@@ -9,18 +9,27 @@ import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
 
+/**
+ * Entidad que nos permite saber el rol
+ * @Data notacion de loombok que nos permite obtener el construtor, get y set
+ * @Entity notacion que nos permite identificar la entidad para convertila en una tabla
+ * @table esquema de DB en el cual se crea la entidad (tabla)
+ */
 @Data
 @Entity
 @Table(schema = "redCom")
 public class Rol {
 
     /**
-     * identificador de la clase
+     * identificador de la clase autoincrementable
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idRol;
 
+    /**
+     * Nombre del rol
+     */
     @Column(nullable = false)
     @NotEmpty(message = "el nombre del rol no pude ser nulo")
     private String nombreRol;
@@ -31,6 +40,9 @@ public class Rol {
     @Column(columnDefinition = "boolean default true")
     private Boolean activo= true;
 
+    /**
+     * Relacion con tabla usuario
+     */
     @OneToMany(mappedBy = "rol", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JsonIgnore
     private  Set <Usuario> listaUsuarios = new HashSet<Usuario>();
