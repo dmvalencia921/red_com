@@ -27,7 +27,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Usuario no encontrado" + username);
         }
         Usuario user = opUser.get();
-        // Obtener la lista de roles del usuario
+       //obtener rol
       GrantedAuthority authority = new SimpleGrantedAuthority(user.getRol().getNombreRol());
         return User.builder()
                 .username(user.getUsuario())

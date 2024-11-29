@@ -6,6 +6,11 @@ import java.util.List;
 
 public class Validation {
 
+    /**
+     * Metodo generico que nos permite realizar validaciones
+     * @param obj
+     * @return booleano su cumple o no
+     */
     public static boolean isNullOrEmpty(final Object obj) {
         boolean result = Boolean.FALSE;
         if (obj == null) {
