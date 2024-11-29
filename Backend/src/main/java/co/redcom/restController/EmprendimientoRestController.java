@@ -1,7 +1,7 @@
 package co.redcom.restController;
 
 import co.redcom.entity.Emprendimiento;
-import co.redcom.service.impl.EmprendimietnoService;
+import co.redcom.service.impl.EmprendimientoService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.util.List;
 public class EmprendimientoRestController {
 
     @Autowired
-    private EmprendimietnoService emprendimientoService;
+    private EmprendimientoService emprendimientoService;
 
     @PostMapping("/crearEmprendimiento")
     @Operation(summary = "Crear emprendimiento", description = "Metodo que permite crear un emprendimietno")
