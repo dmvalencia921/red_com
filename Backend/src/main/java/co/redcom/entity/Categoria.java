@@ -41,6 +41,13 @@ public class Categoria {
     @JsonIgnore
     private Set<Emprendimiento> listaEmprendimientos = new HashSet<Emprendimiento>();
 
+    /**
+     * relacion con la entidad Evento
+     */
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
+    private Set<Evento> listaEventos = new HashSet<Evento>();
+
     //-----------------> Auditoria <--------------------
     /**
      * Id del usuario que creo el registro.
