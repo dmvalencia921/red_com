@@ -97,6 +97,13 @@ Usuario {
     @JsonIgnore
     private  Set <Reaccion> listaReaccion = new HashSet<Reaccion>();
 
+    /**
+     * Relacion con tabla Reaccion
+     */
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Comentario> listaComentario = new HashSet<Comentario>();
+
     //-----------------> Auditoria <--------------------
     /**
      * Id del usuario que creo el registro.

@@ -1,13 +1,10 @@
 package co.redcom.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Date;
 
 /**
  * Entidad que nos permite saber el emprendimiento
@@ -15,71 +12,51 @@ import java.util.Set;
  * @Entity notacion que nos permite identificar la entidad para convertila en una tabla
  * @table esquema de DB en el cual se crea la entidad (tabla)
  */
-
 @Data
 @Entity
 @Table(schema = "redCom")
-public class Evento {
+public class Comentario {
+
     /**
      * identificador de la clase autoincrementable
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idEvento;
+    private Integer idComentario;
 
     /**
-     * Titulo del evento
+     * Contenido del comentario
      */
-    @Column(nullable = false, columnDefinition = "TEXT")
-    @NotEmpty(message = "El titulo no puede ser nulo")
-    private String titulo;
+    @Column
+    @NotEmpty(message = "El contenido no puede ser nulo")
+    private String contenido;
 
     /**
-     *Descripcion del evento
-     */
-    @Column(nullable = false, columnDefinition = "TEXT")
-    @NotEmpty(message = "La descripcion no puede ser nula")
-    private String descripcion;
-
-    /**
-     * Fecha de publicación del evento
+     * fecha de publicación de comentario
      */
     @Column(nullable = false, length = 30)
-    private Date fechaEvento;
+    private Date fechaComentario;
 
     /**
-     * Fecha de publicación del evento
-     */
-    @Column(nullable = false, length = 30)
-    private Date fechaPublicacion;
-
-    /**
-     * Relación con tabla categoria
-     */
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
-
-    /**
-     * Relacion con tabla usuario
+     * Relación con tabla usuario
      */
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     /**
-     * Relación con tabla reaccion
+     * Relación con tabla emprendimiento
      */
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Reaccion> listaReaccion = new HashSet<Reaccion>();
+    @ManyToOne
+    @JoinColumn(name = "id_emprendimiento")
+    private Emprendimiento emprendimiento;
 
     /**
-     * Relación con tabla reaccion
+     * Relación con tabla evento
      */
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<Comentario> listaComentario = new HashSet<Comentario>();
+    @ManyToOne
+    @JoinColumn(name = "id_evento")
+    private Evento evento;
 
     //-----------------> Auditoria <--------------------
     /**
@@ -105,4 +82,5 @@ public class Evento {
      */
     @Column(name = "fecha_actualizacion", nullable = true, length = 30)
     private java.util.Date fechaModificacion;
+
 }
