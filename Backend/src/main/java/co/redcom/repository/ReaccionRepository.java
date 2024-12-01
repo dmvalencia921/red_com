@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ReaccionRepository extends JpaRepository<Reaccion, Integer> {
     List<Reaccion> findByTipoReaccionIgnoreCase(String tipoReaccion);
-    Reaccion findOneByTipoReaccionAndIdReaccion(String tipoReaccion, Integer idReaccion);
+    Reaccion findOneByTipoReaccionAndIdReaccionNot(String tipoReaccion, Integer idReaccion);
 
     List<Reaccion> findByUsuario(Usuario usuario);
 }

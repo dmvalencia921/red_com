@@ -56,7 +56,7 @@ public class ReaccionService implements IReaccionService {
         log.info(Constants.MSN_INICIO_LOG_INFO+ classLog+ "actualizar reaccion");
         Optional<Reaccion> lista = reaccionRepository.findById(reaccion.getIdReaccion());
         if(lista.isPresent()){
-            if (Validation.isNullOrEmpty(reaccionRepository.findOneByTipoReaccionAndIdReaccion(reaccion.getTipoReaccion(), reaccion.getIdReaccion()))){
+            if (Validation.isNullOrEmpty(reaccionRepository.findOneByTipoReaccionAndIdReaccionNot(reaccion.getTipoReaccion(), reaccion.getIdReaccion()))){
                 reaccion.setFechaCreacion(new Date());
                 reaccion.setIdUsuarioCreacion(reaccion.getIdUsuarioCreacion());
                 reaccionRepository.save(reaccion);

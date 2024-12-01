@@ -48,14 +48,14 @@ public class Comentario {
      * Relación con tabla emprendimiento
      */
     @ManyToOne
-    @JoinColumn(name = "id_emprendimiento")
+    @JoinColumn(name = "id_emprendimiento", nullable = true)
     private Emprendimiento emprendimiento;
 
     /**
      * Relación con tabla evento
      */
     @ManyToOne
-    @JoinColumn(name = "id_evento")
+    @JoinColumn(name = "id_evento",nullable = true)
     private Evento evento;
 
     //-----------------> Auditoria <--------------------

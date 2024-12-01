@@ -9,8 +9,7 @@ import java.util.List;
 
 public interface EmprendimientoRepository  extends JpaRepository<Emprendimiento, Integer> {
     List<Emprendimiento> findByTituloIgnoreCase(String titulo);
-    Emprendimiento findOneByTituloAndIdEmprendimiento(String titulo, Integer idEmprendimiento);
+    Emprendimiento findOneByTituloAndIdEmprendimientoNot(String titulo, Integer idEmprendimiento);
 
-    Emprendimiento findByTituloIgnoreCaseAndDescripcion(String titulo, String descripcion);
     List<Emprendimiento> findByUsuario(Usuario usuario);
 }

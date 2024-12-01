@@ -56,7 +56,7 @@ public class EventoService implements IEventoService {
         log.info(Constants.MSN_INICIO_LOG_INFO+classLog+"actualizar evento");
         Optional<Evento> lista = eventoRepository.findById(evento.getIdEvento());
         if(lista.isPresent()){
-            if(Validation.isNullOrEmpty(eventoRepository.findOneByTituloAndIdEvento(evento.getTitulo(), evento.getIdEvento()))){
+            if(Validation.isNullOrEmpty(eventoRepository.findOneByTituloAndIdEventoNot(evento.getTitulo(), evento.getIdEvento()))){
                 evento.setFechaModificacion(new Date());
                 evento.setIdUsuarioModificacion(evento.getIdUsuarioModificacion());
                 eventoRepository.save(evento);

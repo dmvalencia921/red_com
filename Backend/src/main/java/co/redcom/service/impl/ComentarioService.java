@@ -56,7 +56,7 @@ public class ComentarioService implements IComentarioService {
         log.info(Constants.MSN_FIN_LOG_INFO + classLog + "actualizar Comentario");
         Optional<Comentario> lista = comentarioRepository.findById(comentario.getIdComentario());
         if(lista.isPresent()){
-            if(Validation.isNullOrEmpty(comentarioRepository.findOneByContenidoAndIdComentario(comentario.getContenido(), comentario.getIdComentario()))){
+            if(Validation.isNullOrEmpty(comentarioRepository.findOneByContenidoAndIdComentarioNot(comentario.getContenido(), comentario.getIdComentario()))){
                 comentario.setFechaModificacion(new Date());
                 comentario.setIdUsuarioModificacion(comentario.getIdUsuarioModificacion());
                 comentarioRepository.save(comentario);

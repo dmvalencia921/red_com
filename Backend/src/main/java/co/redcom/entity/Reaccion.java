@@ -42,14 +42,14 @@ public class Reaccion {
      * relación con la tabla emprendimiento
      */
     @ManyToOne
-    @JoinColumn(name = "id_emprendimiento")
+    @JoinColumn(name = "id_emprendimiento" , nullable = true)
     private Emprendimiento emprendimiento;
 
     /**
      * relación con la tabla evento
      */
     @ManyToOne
-    @JoinColumn(name = "id_evento")
+    @JoinColumn(name = "id_evento", nullable = true)
     private Evento evento;
 
     //-----------------> Auditoria <--------------------

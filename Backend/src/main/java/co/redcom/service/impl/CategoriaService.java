@@ -31,7 +31,7 @@ public class CategoriaService implements ICategoriaService {
            categoria.setFechaCreacion(new Date());
            categoria.setIdUsuarioCreacion(categoria.getIdUsuarioCreacion());
            Categoria newCategoria = categoriaRespository.save(categoria);
-           if(!Validation.isNotNull(newCategoria)){
+           if(!Validation.isNullOrEmpty(newCategoria)){
                return newCategoria;
            }
            log.error(Constants.MSN_FIN_LOG_INFO+classLog+ "No se puede crear la categoria");

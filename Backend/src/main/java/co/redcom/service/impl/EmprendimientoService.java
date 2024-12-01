@@ -55,7 +55,7 @@ public class EmprendimientoService implements IEmprendimientoService {
         log.info(Constants.MSN_INICIO_LOG_INFO+classLog+"actualizar emprendimiento");
         Optional<Emprendimiento> lista = emprendimientoRepository.findById(emprendimiento.getIdEmprendimiento());
         if(lista.isPresent()){
-            if(Validation.isNullOrEmpty(emprendimientoRepository.findOneByTituloAndIdEmprendimiento(emprendimiento.getTitulo(), emprendimiento.getIdEmprendimiento()))){
+            if(Validation.isNullOrEmpty(emprendimientoRepository.findOneByTituloAndIdEmprendimientoNot(emprendimiento.getTitulo(), emprendimiento.getIdEmprendimiento()))){
                 emprendimiento.setFechaModificacion(new Date());
                 emprendimiento.setIdUsuarioModificacion(emprendimiento.getIdUsuarioModificacion());
                 emprendimientoRepository.save(emprendimiento);

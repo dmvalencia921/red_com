@@ -104,6 +104,13 @@ Usuario {
     @JsonIgnore
     private Set<Comentario> listaComentario = new HashSet<Comentario>();
 
+    /**
+     * Relacion con tabla evento
+     */
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Evento> listaEvento = new HashSet<>();
+
     //-----------------> Auditoria <--------------------
     /**
      * Id del usuario que creo el registro.

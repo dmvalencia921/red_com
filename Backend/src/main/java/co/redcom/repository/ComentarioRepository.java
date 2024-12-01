@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ComentarioRepository extends JpaRepository<Comentario, Integer> {
     List<Comentario> findByContenidoIgnoreCase(String contenido);
-    Comentario findOneByContenidoAndIdComentario(String contenido, Integer idComentario);
+    Comentario findOneByContenidoAndIdComentarioNot(String contenido, Integer idComentario);
 
     List<Comentario> findByUsuario(Usuario usuario);
 }
