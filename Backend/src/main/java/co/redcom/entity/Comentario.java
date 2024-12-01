@@ -1,16 +1,13 @@
 package co.redcom.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Date;
 
 /**
- * Entidad que nos permite saber la categoria
+ * Entidad que nos permite saber el emprendimiento
  * @Data notacion de loombok que nos permite obtener el construtor, get y set
  * @Entity notacion que nos permite identificar la entidad para convertila en una tabla
  * @table esquema de DB en el cual se crea la entidad (tabla)
@@ -18,35 +15,48 @@ import java.util.Set;
 @Data
 @Entity
 @Table(schema = "redCom")
-public class Categoria {
+public class Comentario {
 
     /**
-     * Identificador de la clase autoincrementable
+     * identificador de la clase autoincrementable
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCategoria;
+    private Integer idComentario;
 
     /**
-     * Nombre de la categoria
+     * Contenido del comentario
      */
-    @Column(nullable = false)
-    @NotEmpty(message = "El nombre de la categoria no puede ser nulo")
-    private String nombreCategoria;
+    @Column
+    @NotEmpty(message = "El contenido no puede ser nulo")
+    private String contenido;
 
     /**
-     * relacion con la entidad Emprendimiento
+     * fecha de publicación de comentario
      */
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JsonIgnore
-    private Set<Emprendimiento> listaEmprendimientos = new HashSet<Emprendimiento>();
+    @Column(nullable = false, length = 30)
+    private Date fechaComentario;
 
     /**
-     * relacion con la entidad Evento
+     * Relación con tabla usuario
      */
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JsonIgnore
-    private Set<Evento> listaEventos = new HashSet<Evento>();
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
+    /**
+     * Relación con tabla emprendimiento
+     */
+    @ManyToOne
+    @JoinColumn(name = "id_emprendimiento")
+    private Emprendimiento emprendimiento;
+
+    /**
+     * Relación con tabla evento
+     */
+    @ManyToOne
+    @JoinColumn(name = "id_evento")
+    private Evento evento;
 
     //-----------------> Auditoria <--------------------
     /**
@@ -65,11 +75,12 @@ public class Categoria {
      * Fecha de creación del registro
      */
     @Column(name = "fecha_creacion", nullable = false, length = 30)
-    private Date fechaCreacion = new Date();
+    private java.util.Date fechaCreacion = new java.util.Date();
 
     /**
      * Fecha de modificación del registro
      */
     @Column(name = "fecha_actualizacion", nullable = true, length = 30)
-    private Date fechaModificacion;
+    private java.util.Date fechaModificacion;
+
 }
