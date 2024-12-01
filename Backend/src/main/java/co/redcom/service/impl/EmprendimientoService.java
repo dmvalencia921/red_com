@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class EmprendimietnoService implements IEmprendimientoService {
+public class EmprendimientoService implements IEmprendimientoService {
 
     @Autowired
     private EmprendimientoRepository emprendimientoRepository;
