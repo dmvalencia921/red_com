@@ -9,6 +9,7 @@ export interface IUsuario{
     usuario?:string;
     password?:string;
     rol?:Rol;
+    tokenRecuperacion?:string;
     idUsuarioCreacion?:string;
     idUsuarioModificacion?:string;
     fechaModificacion?:Date;
@@ -22,6 +23,7 @@ export class Usuario implements IUsuario{
     usuario?:string;
     password?:string;
     rol?:Rol;
+    tokenRecuperacion?:string;
     idUsuarioCreacion?:string;
     idUsuarioModificacion?:string;
     fechaModificacion?:Date; 
