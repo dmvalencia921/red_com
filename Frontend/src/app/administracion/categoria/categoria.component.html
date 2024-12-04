@@ -1,0 +1,120 @@
+<p-toast />
+<div class="centered-title">
+  <h2>
+    <span style="color: rgb(0, 0, 0)"> CATE</span>
+    <span style="color: #2c85b3">GORIA</span>
+  </h2>
+</div>
+<!--Tabla confiltro-->
+<p-card>
+  <div class="grid">
+    <div class="flex col-offset-1 sm:col-3 md:col-2 xl:col-1">
+      <p-button pRipple severity="success" label="Crear" icon="pi pi-plus" (click)="abrirCrearCategoria()"
+        pTooltip="Abrir modal para crear la categoria" [style]="{ width: '100%' }" />
+    </div>
+    <div class="sm:col-offset-3 sm:col-4 md:col-offset-4 md:col-4 xl:col-offset-7 xl:col-2">
+      <p-iconField iconPosition="right">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input type="text" pInputText placeholder="Search" (input)="
+            tablaCategoria.filterGlobal($any($event.target)!.value, 'contains')
+          " placeholder="Filtrar" [style]="{ width: '100%' }" />
+      </p-iconField>
+    </div>
+  </div>
+  <!--TABLA-->
+  <div class="grid">
+    <div class="col-offset-1 col-10">
+      <p-table [value]="listaCategoria" #tablaCategoria [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="10"
+        [globalFilterFields]="['idCategoria', 'nombreCategoria', 'nomActivo']" [rowsPerPageOptions]="[10, 20]">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th class="text-center" pSortableColumn="idCategoria">
+              Código <p-sortIcon field="idCategoria"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="nombre">
+              Nombre <p-sortIcon field="nombreCategoria"></p-sortIcon>
+            </th>
+            <th class="text-center" pSortableColumn="activo">
+              Estado <p-sortIcon field="activo"></p-sortIcon>
+            </th>
+            <th>Editar</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-categoria>
+          <tr>
+            <td class="text-center">{{ categoria.idCategoria }}</td>
+            <td class="text-center">{{ categoria.nombreCategoria }}</td>
+            <td class="text-center">
+              <p-tag [value]="categoria.activo ? 'ACTIVO' : 'INACTIVO'" [severity]="getSeverity(categoria.activo)"></p-tag>
+            </td>
+            <td class="text-center">
+              &nbsp;
+              <p-button (onClick)="abrirModalEditar(categoria)" icon="pi pi-pencil" styleClass="button-form"
+                pTooltip="Abrir modal para editar la categoria  seleccionada"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <!-- crear categoria -->
+</p-card>
+<p-dialog [closable]="false" header="Agregar categoria" [modal]="true" [visible]="displayCrearCategoria"
+  [style]="{ width: '90%', 'max-width': '35rem' }">
+  <div [formGroup]="fg!">
+    <div class="grid pb-3">
+      <div class="col-4">
+        <label for="nombre" class="font-semibold w-6rem">Nombre:<span class="text-danger">*</span></label>
+      </div>
+      <div class="col-8">
+        <input pInputText class="flex-grow-1 w-full" id="nombre" autocomplete="off" formControlName="nombre" pTooltip="Nombre de la categoria"
+          style="text-transform: uppercase;" maxlength="51" />
+        <br />
+        <small class="p-error"
+          *ngIf="fg.get('nombre')?.errors?.['required'] && (fg.get('nombre')?.dirty || fg.get('nombre')?.touched)">El
+          nombre es obligatorio</small>
+        <small class="p-error" *ngIf="fg.get('nombre')?.hasError('maxlength')">Se ha alcanzado el límite de 15
+          caracteres.</small>
+      </div>
+    </div>
+    <div class="flex justify-content-end gap-2">
+      <p-button label="Cancelar" severity="secondary" (click)="cerrarCrearModal()" />
+      <p-button label="Crear"  (click)="crearCategoria()" />
+    </div>
+  </div>
+</p-dialog>
+
+<!-- Editar categoria-->
+<p-dialog [closable]="false" header="Editar categoria" [modal]="true" [(visible)]="displayEditarCategoria"
+  [style]="{ width: '90%', 'max-width': '30rem' }">
+
+  <div [formGroup]="fg!">
+    <div class="grid pb-3">
+      <div class="col-4">
+        <label for="nombre" class="font-semibold">Nombre:<span class="text-danger">*</span></label>
+      </div>
+      <div class="col-8">
+        <input pInputText class="flex-grow-1 w-full" id="nombre" autocomplete="off" formControlName="nombre" pTooltip="Nombre de la categoria"
+          style="text-transform: uppercase;" maxlength="51" />
+        <br />
+        <small class="p-error"
+          *ngIf="fg.get('nombre')?.errors?.['required'] && (fg.get('nombre')?.dirty || fg.get('nombre')?.touched)">El
+          nombre es obligatorio</small>
+        <small class="p-error" *ngIf="fg.get('nombre')?.hasError('maxlength')">Se ha alcanzado el límite de 50
+          caracteres.</small>
+      </div>
+      <div class="col-4">
+        <label class="font-semibold w-6rem col" for="ny">Activo:</label>
+      </div>
+      <div class="col-8">
+        <p-checkbox formControlName="activo" inputId="activo" binary="true"
+          pTooltip="Marque la casilla si el estado de la categoria es activa" />
+      </div>
+    </div>
+
+    <div class="flex justify-content-end gap-2">
+      <p-button label="Cancelar" severity="secondary" (click)="cerrarEditarModal()" />
+      <p-button label="Editar" [disabled]="!fg.valid" (click)="editarCategoria()" />
+    </div>
+  </div>
+</p-dialog>

@@ -1,5 +1,6 @@
 package co.redcom.security.entity;
 
+import co.redcom.entity.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +15,6 @@ public class AuthResponse {
     private Integer id;
     private String token;
     private String userName;
-    private Boolean isAdmin;
+    private Rol rol;
+    Boolean isAdmin;
 }

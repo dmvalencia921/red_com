@@ -35,6 +35,12 @@ public class Categoria {
     private String nombreCategoria;
 
     /**
+     * Definimos por default el valor
+     */
+    @Column(columnDefinition = "boolean default true")
+    private Boolean activo= true;
+
+    /**
      * relacion con la entidad Emprendimiento
      */
     @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
