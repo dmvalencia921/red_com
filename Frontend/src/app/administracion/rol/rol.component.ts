@@ -71,9 +71,7 @@ export class RolComponent implements OnInit {
   }
 
     //---- Metodos de crear y editar ----//
-    crearRol() {
-      console.log("lo que trae e campo nombre ",this.fg?.get('nombre')?.value!);
-      
+    crearRol() { 
       this.newRol.nombreRol = this.fg?.get('nombre')?.value!;
       this.newRol.idUsuarioCreacion = "1234";
       this.newRol.nomActivo = 'ACTIVO';
@@ -100,25 +98,11 @@ export class RolComponent implements OnInit {
         });
         this.displayCrearRol = false;
       } else {
-        this.onSubmit();
         this.mensaje.mensajeError("Es necesario llenar todos los campos del formulario.");
       }
     }
   
-    onSubmit() {
-      if (this.fg.invalid) {
-        Object.keys(this.fg.controls).forEach((key) => {
-          const control = this.fg.get(key);
-          if (control?.invalid) {
-            console.log(`El campo "${key}" no es válido o falta por llenar.`);
-          }
-        });
-      } else {
-        alert('El formulario está completo.');
-        console.log(this.fg.value); // Procesar datos del formulario
-      }
-    }
-    
+ 
 
     editarRol() {
       this.newRol.nombreRol = this.fg.get('nombre')?.value!;

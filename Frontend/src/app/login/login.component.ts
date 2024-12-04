@@ -43,8 +43,6 @@ export class LoginComponent implements OnInit{
                
         this.storageService.guardar(respuesta);
         const userRoles = this.storageService.tipoUsuario();
-        console.log("el rol es :", userRoles);
-        
         if (userRoles) {
           this.router.navigate(['/administracion/rol']).then(() => {
             history.pushState(null, '', location.href);
@@ -72,10 +70,13 @@ export class LoginComponent implements OnInit{
   validarCorreoElectronico() {
     const correo = this.fg?.get('usuario')?.value!;
     if (correo != null && correo.trim() !== '') {
-      const validarCorreo = this.fg
+      const validarGmail = this.fg
         ?.get('usuario')
-        ?.value!.includes('@uniquindio.edu.co');
-      if (!validarCorreo) {
+        ?.value!.includes('@gmail.com');
+      const validarHotmail = this.fg
+        ?.get('usuario')
+        ?.value!.includes('@hotmail.com');
+      if (!validarGmail && !validarHotmail ) {
         return true;
       } else {
         return false;

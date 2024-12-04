@@ -12,7 +12,7 @@
             type="text"
             placeholder="Usuario"
             class="w-full mb-3"
-            pTooltip="Correo institucional"
+            pTooltip="Correo electrónico"
             pInputText            
           />
           <small
@@ -22,12 +22,11 @@
             El usuario es obligatorio
           </small>
 
-         <!-- <small
+         <small
               class="p-error"
-              *ngIf="validarCorreoElectronico()"
-              >
+              *ngIf="fg && validarCorreoElectronico()">
                 El campo no es un correo electrónico
-          </small>-->
+          </small>
         </div>
   
         <div class="col-12">
@@ -48,9 +47,8 @@
           />
           <small
             class="p-error"
-            *ngIf="fg && fg.get('password') && fg.get('password')?.errors?.['required'] && (fg.get('password')?.dirty || fg.get('password')?.touched)"
-            >
-            El password es obligatorio
+            *ngIf="fg && fg.get('password') && fg.get('password')?.errors?.['required'] && (fg.get('password')?.dirty || fg.get('password')?.touched)">
+            La contraseña es obligatorio
           </small>
 
         </div>

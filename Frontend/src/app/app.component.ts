@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
-  title = 'Frontend';
+  autenticado : boolean = false;
+  title = 'RedCom';
+  sidebarVisible: boolean = false;
 
   constructor(
     private storageService :StorageService,
@@ -16,8 +18,18 @@ export class AppComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    this.autenticado = this.storageService.autenticado();
+
+    console.log("ESTA AUTENTICADO ",this.storageService.autenticado());
     
   }
+
+
+  
+  toggleSidebar(): void {
+    this.sidebarVisible = !this.sidebarVisible;
+  }
+
   logout(): void {
     this.storageService.borrar();
     this.router.navigateByUrl('/login');

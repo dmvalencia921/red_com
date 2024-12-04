@@ -12,4 +12,7 @@ public class Constants {
      */
     public static final String MSN_FIN_LOG_INFO = "Final del metodo :: ";
 
+
+    public static final String ADMIN_ROLE = "ADMIN_ROLE";
+
 }
