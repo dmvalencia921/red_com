@@ -14,7 +14,7 @@ export class EmprendimientoService {
 
   public listarEmprendimiento(): Observable<IEmprendimiento[]> {
     return this.http.get<IEmprendimiento[]>(
-      this.urlService + '/listarEmprendimiento'
+      this.urlService + '/listarEmprendimientos'
     );
   }
 

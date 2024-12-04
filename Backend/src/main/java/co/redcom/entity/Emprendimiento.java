@@ -35,6 +35,11 @@ public class Emprendimiento {
     private String titulo;
 
     /**
+     * Definimos por default el valor
+     */
+    @Column(columnDefinition = "boolean default true")
+    private Boolean activo= true;
+    /**
      * Descripcion del eprendimiento a publicar
      */
     @Column(nullable = false, columnDefinition = "TEXT")

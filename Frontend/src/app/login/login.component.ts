@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
   providers: [MessageService],
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   fg?: FormGroup;
   constructor(
     private appComponent: AppComponent,
@@ -39,12 +39,12 @@ export class LoginComponent implements OnInit{
     const valorPassword: string = this.fg?.get('password')?.value!;
 
     this.authService.login(valorUsuario, valorPassword).subscribe({
-      next: (respuesta) => {      
-               
+      next: (respuesta) => {
         this.storageService.guardar(respuesta);
         const userRoles = this.storageService.tipoUsuario();
+
         if (userRoles) {
-          this.router.navigate(['/administracion/rol']).then(() => {
+          this.router.navigate(['/inicio']).then(() => {
             history.pushState(null, '', location.href);
             window.location.reload();
           });
@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit{
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'No tienes los permisos necesarios para ingresar al sistema',
+            detail:
+              'No tienes los permisos necesarios para ingresar al sistema',
           });
           this.appComponent.logout(); // Llamar al método de cierre de sesión
           this.router.navigate(['/login']); // Redirigir a la página de inicio de sesión
@@ -76,7 +77,7 @@ export class LoginComponent implements OnInit{
       const validarHotmail = this.fg
         ?.get('usuario')
         ?.value!.includes('@hotmail.com');
-      if (!validarGmail && !validarHotmail ) {
+      if (!validarGmail && !validarHotmail) {
         return true;
       } else {
         return false;
@@ -84,5 +85,4 @@ export class LoginComponent implements OnInit{
     }
     return null;
   }
-  
 }

@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-<<<<<<< HEAD
 import { PageHomeComponent } from './page/page-home/page-home.component';
 import { PageEntrepreneurshipComponent } from './page/page-entrepreneurship/page-entrepreneurship.component';
 import { PageEventComponent } from './page/page-event/page-event.component';
-
+import { LoginComponent } from './login/login.component';
+import { CategoriaComponent } from './administracion/categoria/categoria.component';
+import { UsuarioComponent } from './administracion/usuario/usuario.component';
+import { RolComponent } from './administracion/rol/rol.component';
+import { EmprendimientoComponent } from './administracion/emprendimiento/emprendimiento.component';
 const routes: Routes = [
-  {
-    path: 'administrador/rol',
-    redirectTo: 'administracion/rol',
-    pathMatch: 'full',
-  },
+  { path: 'inicio', component: PageHomeComponent },
+  { path: 'emprendimiento', component: EmprendimientoComponent},
+  { path: 'eventos', component: PageEventComponent },
+  { path: 'categorias', component: CategoriaComponent },
+  { path: 'rol', component: RolComponent },
+  { path: '', redirectTo: '/iniciarsesion', pathMatch: 'full' },
   {
     path: 'administracion',
     loadChildren: () =>
@@ -18,22 +22,8 @@ const routes: Routes = [
         (m) => m.AdministracionModule
       ),
   },
-  { path: 'inicio', component: PageHomeComponent },
-  { path: 'emprendimiento', component: PageEntrepreneurshipComponent },
-  { path: 'evento', component: PageEventComponent },
-  { path: '', component: PageHomeComponent },
-=======
-import { LoginComponent } from './login/login.component';
-
-const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {
-    path: 'administracion',
-    loadChildren: () =>
-      import('./administracion/administracion.module').then(m => m.AdministracionModule),
-  },
-  { path: 'login', component: LoginComponent },
->>>>>>> main
+  { path: 'iniciarsesion', component: LoginComponent },
+  { path: 'usuario', component: UsuarioComponent },
 ];
 
 @NgModule({
