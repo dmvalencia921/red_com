@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-<<<<<<< HEAD
 import { PageHomeComponent } from './page/page-home/page-home.component';
 import { PageEntrepreneurshipComponent } from './page/page-entrepreneurship/page-entrepreneurship.component';
 import { PageEventComponent } from './page/page-event/page-event.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -22,19 +22,16 @@ const routes: Routes = [
   { path: 'emprendimiento', component: PageEntrepreneurshipComponent },
   { path: 'evento', component: PageEventComponent },
   { path: '', component: PageHomeComponent },
-=======
-import { LoginComponent } from './login/login.component';
-
-const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'administracion',
     loadChildren: () =>
       import('./administracion/administracion.module').then(m => m.AdministracionModule),
   },
   { path: 'login', component: LoginComponent },
->>>>>>> main
-];
+
+
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
