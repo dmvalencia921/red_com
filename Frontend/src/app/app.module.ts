@@ -6,10 +6,26 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { FeaturedComponent } from './page/page-home/component/featured/featured.component'
+import { FooterComponent } from './component/footer/footer.component';
+import { PageEntrepreneurshipComponent } from './page/page-entrepreneurship/page-entrepreneurship.component';
+import { PageEventComponent } from './page/page-event/page-event.component';
+import { PageHomeComponent } from './page/page-home/page-home.component';
+import { WelcomeComponent } from './page/page-home/component/welcome/welcome.component';
+import { CarouselEntreComponent } from './page/page-entrepreneurship/component/carousel-entre/carousel-entre.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    FeaturedComponent,
+    FooterComponent,
+    PageEntrepreneurshipComponent,
+    PageEventComponent,
+    PageHomeComponent,
+    WelcomeComponent,
+    CarouselEntreComponent
   ],
   imports: [
     BrowserModule,

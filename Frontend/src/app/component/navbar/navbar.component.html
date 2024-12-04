@@ -1,0 +1,77 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light container mt-2 border-1 border bg-light rounded rounded-5"
+  fixed-top
+>
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand" routerLink="/inicio">
+      <img
+        src="../../../../assets/logo.png"
+        alt="Logo"
+        width="80"
+        height="80"
+        class="d-inline-block align-text-top"
+      />
+    </a>
+
+    <!-- Botón toggle para móviles -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenido del Navbar -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Links de navegación -->
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            routerLink="/inicio"
+            routerLinkActive="active"
+            >Inicio</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/emprendimiento"
+            routerLinkActive="active"
+            >Emprendimientos</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/eventos" routerLinkActive="active"
+            >Eventos</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Administración
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/adminitracion/rol">Rol</a></li>
+            <li><a class="dropdown-item" href="/usuario">Usuario</a></li>
+            <li><a class="dropdown-item" href="/categoria">Categoría</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button class="btn btn-primary me-2" routerLink="/iniciarsesion">
+        Iniciar Sesión
+      </button>
+    </div>
+  </div>
+</nav>
