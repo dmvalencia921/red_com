@@ -4,6 +4,8 @@ import { IRol, Rol } from '../../model/rol-model';
 import { RolService } from '../../services/rol.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { UsuarioService } from '../../services/usuario.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-usuario',
@@ -23,6 +25,8 @@ export class UsuarioComponent implements OnInit {
   displayCrearUsuario = false;
   displayEditarUsuario = false;
 
+  noIdentificacion?: string;
+
   fg = new FormGroup({
     numIdentificacion: new FormControl(0,[Validators.required]),
     nombres: new FormControl('',[Validators.required]),
@@ -37,11 +41,33 @@ export class UsuarioComponent implements OnInit {
   });
 
   constructor(
-    private rolService : RolService
+    private rolService : RolService,
+    private usuarioService : UsuarioService,
+    private storageService : StorageService
   ){}
 
   ngOnInit(): void {
-    
+    this.listarUsuarios();
+    this.listarRol();
+    this.buscarUsuarioPorUsuario(this.storageService.getUserName());
+  }
+
+  buscarUsuarioPorUsuario(userName: string):void{
+    this.usuarioService.buscarUsuarioPorUserName(userName).subscribe({
+      next:(dataUsuario) =>{
+        this.noIdentificacion = dataUsuario.numIdentificacion;
+      },
+      error: (dataerror) => console.log(dataerror),
+    });
+  }
+
+  listarUsuarios():void{
+    this.usuarioService.listarUsuario().subscribe({
+      next: datalistausuario =>{
+        this.listaUsuarios = datalistausuario;
+      },
+      error: dataerror => console.log(dataerror)
+    });
   }
 
   listarRol(){
@@ -54,7 +80,16 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
+  asignarRolSeleccionado(rol : IRol){
+    this.rolSeleccionado = rol;
+  }
   
+  abrirCrearModal(): void {
+    this.fg.reset();
+    this.newUsuario = new Usuario();
+    this.displayCrearUsuario = true;
+  }
+
   cerrarEditarModal() {
     this.displayEditarUsuario = false;
   }
