@@ -1,5 +1,6 @@
 package co.redcom.security.service.impl;
 
+import co.redcom.entity.Rol;
 import co.redcom.entity.Usuario;
 import co.redcom.repository.UsuarioRepository;
 import co.redcom.security.entity.AuthRequest;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,15 +36,20 @@ public class AuthenticationService implements IAuthenticationService {
                     .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
         String token = tokenProvider.createToken(au);
-        return AuthResponse.builder().userName(request.getUsername()).token(token).build();
+        UsuarioAuthorizationDto userDTO = infoUsuario(request.getUsername());
+        Rol rol = userDTO.getRol();
+        return AuthResponse.builder().id(userDTO.getId()).userName(request.getUsername()).rol(rol).token(token).isAdmin(userDTO.getIsAdmin()).build();
     }
 
     @Override
     public UsuarioAuthorizationDto infoUsuario(String usuario) {
         Usuario usuarioExistente = usuarioService.buscarUsuarioPorUsuario(usuario);
+        Rol rol = usuarioExistente.getRol();
 
+
+        boolean isAdmin = rol.getNombreRol().contains(Constants.ADMIN_ROLE);
         UsuarioAuthorizationDto usuarioResp = UsuarioAuthorizationDto.builder().userName(usuario)
-                .id(usuarioExistente.getIdUsuario()).build();
+                .id(usuarioExistente.getIdUsuario()).rol(rol).isAdmin(isAdmin).build();
         return usuarioResp;
 
     }

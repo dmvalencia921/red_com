@@ -25,15 +25,12 @@ export class StorageService {
       return false;
   }
 
-  tipoUsuario(): string[] {
+  tipoUsuario(): any {
     let valor = window.sessionStorage.getItem(llaveUsuario);
-    console.log("valor", valor);
-    
-    
     if (valor) {
-      return JSON.parse(valor);
+      return JSON.parse(valor).rol;
     } else {
-      return []; // Devolver una lista vacía si no hay roles
+      return ; // Devolver una lista vacía si no hay roles
     }
   }
 

@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<div class="grid">
+    <div class="col-1 md:col-1 xl:col-1 mr-8">
+        <a class="w-full" href="administracion/proyecto"><img src="../assets/images/Logo.png" /></a>
+    </div>
+    <div *ngIf="autenticado" class="col-offset-1 col-6 md:col-7 xl:col-8 pt-5 ml-2 mr-2 flex justify-content-center">
+        <h1 style="font-size: 4rem;">
+            <span style="color: black">RED</span>
+            <span style="color: #2c85b3">COM</span>
+        </h1>
+    </div>
+
+</div>
+<div class="pb-4 ">
+    <img width="100%" src="../assets/images/border-uniquindio.jpg" />
+</div>
+<div class="content-container" [ngClass]="{'shifted': sidebarVisible}">
+    <router-outlet></router-outlet>
+</div>
