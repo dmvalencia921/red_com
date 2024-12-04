@@ -14,9 +14,7 @@ import { Utilities } from '../../util/utilities';
   styleUrl: './usuario.component.scss',
   providers: [MessageService],
 })
-
 export class UsuarioComponent implements OnInit {
-
   listaUsuarios: IUsuario[] = [];
   newUsuario: Usuario = new Usuario();
   usuario?: IUsuario;
@@ -29,18 +27,15 @@ export class UsuarioComponent implements OnInit {
 
   noIdentificacion?: string;
 
-  mensaje = Utilities
+  mensaje = Utilities;
 
   fg = new FormGroup({
     numIdentificacion: new FormControl(0, [Validators.required]),
     nombres: new FormControl('', [Validators.required]),
     apellidos: new FormControl('', [Validators.required]),
-    telefono: new FormControl(0, [Validators.required]),
+    telefono: new FormControl(0, ),
     usuario: new FormControl('', [Validators.required]),
-    clave: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(80)
-    ]),
+    clave: new FormControl('', [Validators.required, Validators.maxLength(80)]),
     rol: new FormControl(0, [Validators.required]),
   });
 
@@ -49,7 +44,7 @@ export class UsuarioComponent implements OnInit {
     private usuarioService: UsuarioService,
     private storageService: StorageService,
     private messageService: MessageService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.listarUsuarios();
@@ -68,21 +63,24 @@ export class UsuarioComponent implements OnInit {
 
   listarUsuarios(): void {
     this.usuarioService.listarUsuario().subscribe({
-      next: datalistausuario => {
+      next: (datalistausuario) => {
         this.listaUsuarios = datalistausuario;
       },
-      error: dataerror => console.log(dataerror)
+      error: (dataerror) => console.log(dataerror),
     });
   }
 
   listarRol() {
     this.rolService.listarRol().subscribe({
       next: (dataRol) => {
+        console.log(dataRol);
         this.listaRol = dataRol;
-        this.listaRol.forEach(element => { element.nomActivo = element.activo ? 'ACTIVO' : 'INACTIVO' })
+        this.listaRol.forEach((element) => {
+          element.nomActivo = element.activo ? 'ACTIVO' : 'INACTIVO';
+        });
       },
-      error: dataerror => console.log(dataerror)
-    })
+      error: (dataerror) => console.log(dataerror),
+    });
   }
 
   asignarRolSeleccionado(rol: IRol) {
@@ -94,8 +92,8 @@ export class UsuarioComponent implements OnInit {
     this.newUsuario = new Usuario();
     this.displayCrearUsuario = true;
   }
-  
-  abrirModalEditar(usuario : Usuario){
+
+  abrirModalEditar(usuario: Usuario) {
     this.fg.reset();
     this.newUsuario = { ...usuario };
     this.fg.get('nombres')?.setValue(usuario.nombres!);
@@ -103,7 +101,6 @@ export class UsuarioComponent implements OnInit {
     this.fg.get('usuario')?.setValue(usuario.usuario!);
     this.fg.get('clave')?.setValue(usuario.password!);
     this.fg.get('rol')?.setValue(usuario.rol?.idRol!);
-    
 
     this.displayEditarUsuario = true;
   }
@@ -116,6 +113,7 @@ export class UsuarioComponent implements OnInit {
     this.newUsuario.tokenRecuperacion = '';
     this.newUsuario.idUsuarioCreacion = this.noIdentificacion;
     this.newUsuario.rol = this.rolSeleccionado;
+    this.newUsuario.telefono = '21216';
 
     if (this.fg.valid) {
       this.usuarioService.crearUsuarios(this.newUsuario).subscribe({
@@ -139,21 +137,24 @@ export class UsuarioComponent implements OnInit {
       });
       this.displayCrearUsuario = false;
     } else {
-      this.mensaje.mensajeError("Es necesario completar todos los campos del formulario para crear.");
+      // this.mensaje.mensajeError(
+      //   'Es necesario completar todos los campos del formulario para crear.'
+      // );
+      this.getControlNames();
     }
   }
 
-  editarUsuario(){
+  editarUsuario() {
     this.newUsuario.nombres = this.fg?.get('nombres')?.value!;
     this.newUsuario.apellidos = this.fg?.get('apellidos')?.value!;
     this.newUsuario.usuario = this.fg.get('usuario')?.value!;
-    this.newUsuario.rol = this.rolSeleccionado ;
+    this.newUsuario.rol = this.rolSeleccionado;
     this.newUsuario.tokenRecuperacion = '';
     this.newUsuario.idUsuarioModificacion = this.noIdentificacion;
 
-    if(this.fg.valid){
+    if (this.fg.valid) {
       this.usuarioService.actualizarUsuario(this.newUsuario).subscribe({
-        next:(dataUsuario)=>{
+        next: (dataUsuario) => {
           this.messageService.add({
             severity: 'success',
             detail: 'Registro actualizado con éxito',
@@ -170,8 +171,10 @@ export class UsuarioComponent implements OnInit {
           });
         },
       });
-    }else {
-      this.mensaje.mensajeError("Es necesario completar todos los campos del formulario para editar.");
+    } else {
+      this.mensaje.mensajeError(
+        'Es necesario completar todos los campos del formulario para editar.'
+      );
     }
   }
 
@@ -191,6 +194,20 @@ export class UsuarioComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  getControlNames() {
+    // Recorremos todos los controles en el FormGroup
+    Object.keys(this.fg.controls).forEach((controlName) => {
+      const control = this.fg.get(controlName);
+
+      // Verificamos si el control es inválido y mostramos el nombre
+      if (control?.invalid) {
+        console.log(`El campo "${controlName}" tiene errores de validación.`);
+      } else {
+        console.log(`El campo "${controlName}" está válido.`);
+      }
+    });
   }
 
   cerrarEditarModal() {

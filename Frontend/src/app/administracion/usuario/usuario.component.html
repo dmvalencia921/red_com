@@ -67,6 +67,13 @@
     <div [formGroup]="fg">
         <div class="grid pb-3">
             <div class="col-4">
+                <label for="numIdentificacion" class="  font-semibold">CC :</label>
+            </div>
+            <div class="col-8 ">
+                <input pInputText class=" flex-grow-1 w-full" id="numIdentificacion" formControlName="numIdentificacion"
+                    pTooltip="Cédula usuario" value="newUsuario.numIdentificacion" />
+            </div>
+            <div class="col-4">
                 <label for="nombres" class="  font-semibold">Nombres :</label>
             </div>
             <div class="col-8 ">
@@ -113,7 +120,7 @@
                 <label for="usuario" class="font-semibold">Role:<span class="text-danger">*</span></label>
             </div>
             <div class="col-8">
-                <p-dropdown [options]="listaRol" formControlName="rol" optionLabel="nombre"
+                <p-dropdown [options]="listaRol" formControlName="rol" optionLabel="nombreRol"
                     placeholder="Seleccione el rol" appendTo="body" (onChange)="asignarRolSeleccionado($event.value)"
                     [filter]="true" filterBy="privilegio" [showClear]="true"
                     [style]="{ 'max-width': '75%', 'min-width': '75%' }"
